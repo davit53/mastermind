@@ -17,7 +17,7 @@ public class ICS3U_FP {
         Random random = new Random();
         String[] code = new String[4];
         String[] codeBreaker = new String[4];
-        int i = 0, j = 0;
+        int i = 0, j = 0, k = 0, temp = 0;
         Boolean verifyAnswer = false;
 
         //User Input
@@ -69,7 +69,10 @@ public class ICS3U_FP {
         System.out.print(code[i] + " ");
 
 
-        //Check if correct
+        /*
+        Check if correct
+        */
+        //Case if all mathes
         for(j = 0; j < 4; j++){
             if(codeBreaker[j].equals(code[j])){
                 verifyAnswer = true;
@@ -79,6 +82,26 @@ public class ICS3U_FP {
                 break;
             }
         }
+
+        System.out.println("\n\n");
+        for(temp = 0; temp < 4; temp ++){
+            if(codeBreaker[temp].equals(code[k])){
+                System.out.println("Red pug");
+            }
+            else if(codeBreaker[temp].equals(code[k+1]) 
+            || codeBreaker[temp].equals(code[k+2])
+            || codeBreaker[temp].equals(code[k+2])){
+                System.out.println("White Pug");
+            }
+            else if(codeBreaker[temp].equals(code[k]) == false 
+            && codeBreaker[temp].equals(code[k + 1]) == false
+            && codeBreaker[temp].equals(code[k + 2]) == false
+            && codeBreaker[temp].equals(code[k + 3]) == false){
+                System.out.println("No Pugs");
+            } 
+        }
+
+
 
         //Print based on correct or incorrect code
         if(verifyAnswer == true){
