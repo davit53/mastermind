@@ -17,7 +17,7 @@ public class ICS3U_FP {
         Random random = new Random();
         String[] code = new String[4];
         String[] codeBreaker = new String[4];
-        int i = 0, j = 0, k = 0, temp = 0, counterForRed = 0, numberOfTries = 0;
+        int i = 0, j = 0, k = 0, temp = 0, numberOfTries = 0;
         Boolean verifyAnswer = false;
 
 
@@ -87,48 +87,33 @@ public class ICS3U_FP {
                     }
                 }
 
-                //Case for Red Pugs
+                //Case Pugs
                 System.out.println("\n\n");
-                for(i = 0; i < 4; i ++){
-                    if(counterForRed == 0){
-                        for(counterForRed = 0; counterForRed < 4; counterForRed++){
-                            if(codeBreaker[counterForRed].equals(code[counterForRed])){
+                for(int x = 0; x < 4; x++){
+                    for(int y = 0; y < 4; y++){
+                        if(codeBreaker[x].equals(code[y])){
+                            if(x == y){
                                 System.out.println("Red Pug");
+                            }
+                            else{
+                                System.out.println("White Pug");
                             }
                         }
                     }
-                }
-                //Case for White Pugs
-                if(codeBreaker[0].equals(code[0]) == false && 
-                (codeBreaker[0].equals(code[1]) 
-                || codeBreaker[0].equals(code[2])
-                || codeBreaker[0].equals(code[3]))){
-                    System.out.println("White Pug");
-                }
-                if(codeBreaker[1].equals(code[1]) == false && 
-                (codeBreaker[1].equals(code[0]) 
-                || codeBreaker[1].equals(code[2])
-                || codeBreaker[1].equals(code[3]))){
-                    System.out.println("White Pug");
-                }
-                if(codeBreaker[2].equals(code[2]) == false && 
-                (codeBreaker[2].equals(code[0]) 
-                || codeBreaker[2].equals(code[1])
-                || codeBreaker[2].equals(code[3]))){
-                    System.out.println("White Pug");
-                }
-                if(codeBreaker[3].equals(code[3]) == false && 
-                (codeBreaker[3].equals(code[0]) 
-                || codeBreaker[3].equals(code[1])
-                || codeBreaker[3].equals(code[2]))){
-                    System.out.println("White Pug");
                 }
             }
 
             numberOfTries++;
         } while(verifyAnswer == false && numberOfTries != 10);
-    }
 
+            //Messages
+        if(numberOfTries == 10){
+            System.out.println("You have reached the limit of 10 tries! Game over!");
+        }
+        if(verifyAnswer == true){
+            System.out.println("Great Job! That is the correct code!");
+        }
+    }
 
     
     /*
