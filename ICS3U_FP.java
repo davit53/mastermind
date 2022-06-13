@@ -67,13 +67,11 @@ public class ICS3U_FP {
 
         //Decleration of Main variables
         Scanner input = new Scanner(System.in);
-        Random random = new Random();
-        String[] code = new String[4];
+        String[] code;
         String[] codeBreaker = new String[4];
         int i = 0, j = 0, numberOfTries = 0;
-        Boolean verifyAnswer = false, checkPlayAgain = false;
+        Boolean verifyAnswer = false;
         int codeBreakerPoints = 0, codeMakerPoints = 0;
-        String playAgain = "";
 
         //Temporary Welcoming Message
         System.out.println("The colours that you can input include: ");
@@ -87,27 +85,7 @@ public class ICS3U_FP {
         /*
         Random Generated Code
         */
-        //First Colour
-        int randomCodeNumber = random.nextInt(6);
-        generateOneColour(code, randomCodeNumber, i, random);
-
-        //Second Colour
-        i = 1;
-        do{
-            generateOneColour(code, randomCodeNumber, i, random);
-        } while(code[0].equals(code[i]));
-
-        //Third Colour
-        i = 2;
-        do{
-            generateOneColour(code, randomCodeNumber, i, random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]));
-
-        //Fourth Colour
-        i = 3;
-        do{
-            generateOneColour(code, randomCodeNumber, i,random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
+        code = fullColourCode();
 
         do{
             //Print if correct code
@@ -163,46 +141,47 @@ public class ICS3U_FP {
             numberOfTries++;
         } while(verifyAnswer == false && numberOfTries != 10);
 
-        //Point System (1 try --> CodeMaker: 1 point CodeBreaker: 9 points)
-        //              10 tries --> CodeMaker: 10 points CodeBreaker: 0 points)
+        //Point System (1 try --> CodeMaker: 1 point CodeBreaker: 10 points)
+        //              10 tries --> CodeMaker: 10 points CodeBreaker: 1 point)
         if(numberOfTries == 1){
             codeMakerPoints++;
-            codeBreakerPoints+=9;
+            codeBreakerPoints+=10;
         }
         else if(numberOfTries == 2){
             codeMakerPoints+=2;
-            codeBreakerPoints+=8;
+            codeBreakerPoints+=9;
         }
         else if(numberOfTries == 3){
             codeMakerPoints+=3;
-            codeBreakerPoints+=7;
+            codeBreakerPoints+=8;
         }
         else if(numberOfTries == 4){
             codeMakerPoints+=4;
-            codeBreakerPoints+=6;
+            codeBreakerPoints+=7;
         }
         else if(numberOfTries == 5){
             codeMakerPoints+=5;
-            codeBreakerPoints+=5;
+            codeBreakerPoints+=6;
         }
         else if(numberOfTries == 6){
             codeMakerPoints+=6;
-            codeBreakerPoints+=4;
+            codeBreakerPoints+=5;
         }
         else if(numberOfTries == 7){
             codeMakerPoints+=7;
-            codeBreakerPoints+=3;
+            codeBreakerPoints+=4;
         }
         else if(numberOfTries == 8){
             codeMakerPoints+=8;
-            codeBreakerPoints+=2;
+            codeBreakerPoints+=3;
         }
         else if(numberOfTries == 9){
             codeMakerPoints+=9;
-            codeBreakerPoints++;
+            codeBreakerPoints+=2;
         }
         else{
             codeMakerPoints+=10;
+            codeBreakerPoints++;
         }
         //Add up the points
         totalBreakerPoints = totalBreakerPoints+codeBreakerPoints;   
@@ -229,9 +208,9 @@ public class ICS3U_FP {
      * Pre: Colour is represented as a random generated number
      * Post: Colour is converted into a letter with the type String
      */
-    public static void generateOneColour(String[] code, int randomCodeNumber, int i, Random random){
+    public static void generateOneColour(String[] code, int i, Random random){
 
-        randomCodeNumber = random.nextInt(6);
+        int randomCodeNumber = random.nextInt(6);
         if(randomCodeNumber  == 0){
             code[i] = "R";
         } 
@@ -252,5 +231,41 @@ public class ICS3U_FP {
         } 
 
     }
+
+    public static String[] fullColourCode(){
+        
+        String[] code = new String[4];
+        Random random = new Random();
+
+        /*
+        Random Generated Code
+        */
+        //First Colour
+        int  i = 0;
+        int randomCodeNumber = random.nextInt(6);
+        generateOneColour(code, i, random);
+
+        //Second Colour
+        i = 1;
+        do{
+            generateOneColour(code, i, random);
+        } while(code[0].equals(code[i]));
+
+        //Third Colour
+        i = 2;
+        do{
+            generateOneColour(code, i, random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]));
+
+        //Fourth Colour
+        i = 3;
+        do{
+            generateOneColour(code, i,random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
+
+        return code;
+
+    }
+    
 
 }
