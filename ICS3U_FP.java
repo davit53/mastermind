@@ -328,7 +328,17 @@ public class ICS3U_FP {
         //Introduction
         System.out.print("\033[0;1m");
         System.out.println("_____________________________________________________");
-        System.out.print("                ~~~~ MASTERMIND ~~~~");
+        System.out.print("                ~~~~" + textPurple + " M" 
+        + textGreen + "A" 
+        + textRed + "S" 
+        + textBlue + "T" 
+        + textYellow + "E" 
+        + textPurple + "R" 
+        + textRed + "M"
+        + textBlue + "I" 
+        + textGreen + "N"
+        + textYellow + "D" 
+        + textReset + "\033[0;1m" +  " ~~~~");
         System.out.println("\n_____________________________________________________");
         System.out.println("Hello There and Welcome to Mastermind! ");
 
