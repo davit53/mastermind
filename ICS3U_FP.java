@@ -63,6 +63,9 @@ public class ICS3U_FP {
                         System.out.println(textPurple + "Thank you for playing " + textReset + name + textPurple +  ", Come back for more later! " + textReset);
                         break;
                     }
+                    else if(playAgain.equals("1")){
+                        oneGame();
+                    }
                 }
             }
         } while(playAgain.equals("1"));
@@ -80,19 +83,19 @@ public class ICS3U_FP {
         A: 15 - 10 points (not including)
         */
         if(totalBreakerPoints <= 2){
-            System.out.println("\nYour grade is: F");
+            System.out.println("\nYour grade is:" + textYellow + " F" + textReset);
         }
         else if(totalBreakerPoints > 2 && totalBreakerPoints <= 4){
-            System.out.println("\nYour grade is: D");
+            System.out.println("\nYour grade is:" + textYellow + " D" + textReset);
         }
         else if(totalBreakerPoints > 4 && totalBreakerPoints <= 6){
-            System.out.println("\nYour grade is: C");
+            System.out.println("\nYour grade is:" + textYellow + " C" + textReset);
         }
         else if(totalBreakerPoints > 6 && totalBreakerPoints <= 10){
-            System.out.println("\nYour grade is: B");
+            System.out.println("\nYour grade is:" + textYellow + " B" + textReset);
         }
         else if(totalBreakerPoints > 10){
-            System.out.println("\nYour grade is: A");
+            System.out.println("\nYour grade is:" + textYellow + " A" + textReset);
         }
 
         //Dsiplay who won
@@ -117,8 +120,28 @@ public class ICS3U_FP {
         int i = 0, j = 0, numberOfTries = 0;
         Boolean verifyAnswer = false;
         int codeBreakerPoints = 0, codeMakerPoints = 0;
+        String selectLevel;
+        
+            
+        /*
+        Select Level
+        */
+        code = fullColourCodeLevelOne();
+        System.out.println("Please select a level (Enter the corresponsing number)");
+        System.out.println("<1> Level 1");
+        System.out.println("<2> Level 2");
+        System.out.println("<3> Level 3");
+        selectLevel = input.nextLine();
 
-        //Temporary Welcoming Message
+        if(selectLevel.equals("1")){
+            code = fullColourCodeLevelOne();
+        }
+        else if(selectLevel.equals("2")){
+            code = fullColourCodeLevelOne();
+        }
+
+
+        //Mini-Instructions
         System.out.println("\nThe colours that you can input include: ");
         System.out.println("R for Red");
         System.out.println("B for blue");
@@ -126,11 +149,6 @@ public class ICS3U_FP {
         System.out.println("W for white");
         System.out.println("Y for yellow");
         System.out.println("G for green");
-    
-        /*
-        Random Generated Code
-        */
-        code = fullColourCode();
 
         do{
             //Print if correct code
@@ -283,7 +301,12 @@ public class ICS3U_FP {
 
     }
 
-    public static String[] fullColourCode(){
+    /* 
+     * Description: 4 Colour code combination
+     * Pre: Colours are given to the functions as strings
+     * Post: Code is returned as a array string
+     */ 
+    public static String[] fullColourCodeLevelOne(){
         
         String[] code = new String[4];
         Random random = new Random();
@@ -313,6 +336,104 @@ public class ICS3U_FP {
         do{
             generateOneColour(code, i,random);
         } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
+
+        return code;
+
+    }
+
+    /* 
+     * Description: 5 Colour code combination
+     * Pre: Colours are given to the functions as strings
+     * Post: Code is returned as a array string
+     */ 
+    public static String[] fullColourCodeLevelTwo(){
+        
+        String[] code = new String[4];
+        Random random = new Random();
+
+        /*
+        Random Generated Code
+        */
+        //First Colour
+        int  i = 0;
+        int randomCodeNumber = random.nextInt(6);
+        generateOneColour(code, i, random);
+
+        //Second Colour
+        i = 1;
+        do{
+            generateOneColour(code, i, random);
+        } while(code[0].equals(code[i]));
+
+        //Third Colour
+        i = 2;
+        do{
+            generateOneColour(code, i, random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]));
+
+        //Fourth Colour
+        i = 3;
+        do{
+            generateOneColour(code, i,random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
+
+        //Fifth Colour
+        i = 4;
+        do{
+            generateOneColour(code, i,random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]) ||code[3].equals(code[i]));
+
+        return code;
+
+    }
+
+    /* 
+     * Description: 6 Colour code combination
+     * Pre: Colours are given to the functions as strings
+     * Post: Code is returned as a array string
+     */ 
+    public static String[] fullColourCodeLevelThree(){
+        
+        String[] code = new String[4];
+        Random random = new Random();
+
+        /*
+        Random Generated Code
+        */
+        //First Colour
+        int  i = 0;
+        int randomCodeNumber = random.nextInt(6);
+        generateOneColour(code, i, random);
+
+        //Second Colour
+        i = 1;
+        do{
+            generateOneColour(code, i, random);
+        } while(code[0].equals(code[i]));
+
+        //Third Colour
+        i = 2;
+        do{
+            generateOneColour(code, i, random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]));
+
+        //Fourth Colour
+        i = 3;
+        do{
+            generateOneColour(code, i,random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
+
+        //Fifth Colour
+        i = 4;
+        do{
+            generateOneColour(code, i,random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]) ||code[3].equals(code[i]));
+
+        //Sixth Colour
+        i = 5;
+        do{
+            generateOneColour(code, i,random);
+        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]) || code[3].equals(code[i]) ||code[4].equals(code[i]));
 
         return code;
 
@@ -352,14 +473,14 @@ public class ICS3U_FP {
         String next = "";
 
         //Made so that the user is not overwhelmed with information and text
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println("------EXPLENATION------");
         System.out.println("NOTE: This is a general overview of the game.");
         System.out.println("**** 1 ****");
         System.out.println("Mastermind is a player vs player board game. It consists of the code-maker and the code-breaker. ");
         System.out.println("The code-maker takes a specified amount of colours and makes a 4 colour code. ");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println("**** 2 ****");
         System.out.println("Example: the available colours are");
@@ -371,14 +492,14 @@ public class ICS3U_FP {
         System.out.print(textYellow + "Yellow " + textReset);
         System.out.print("\033[0;1m");
         System.out.println("The job of the code-breaker is to find the correct code. ");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println("**** 3 ****");
         System.out.println("Pegs on the side of the board are placed to provide clues to the code-breaker.");
         System.out.println("A white coloured peg represents that the colour is in the code, but not in the right position.");
         System.out.println("A red coloured peg, represents that the colour is in the code and in the right position. ");
         System.out.println("It should be noted that there is no correlation of the location of the pegs to the location of the colours.");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println("**** 4 ****");
         System.out.println("You must use logic and reasoning to figure out which positions are correct and which are not!");
@@ -395,38 +516,40 @@ public class ICS3U_FP {
         //Decleration Of Variables
         String next = "";
 
+        System.out.println("\n<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
         System.out.println("Before we get started, here are the official instructions for this game: ");
         System.out.println(textCyan + "1)" + textReset + " The code-maker takes 4 colours and makes a code. ");
         System.out.println("    - The available colours are red, green, blue, orange, white, and yellow.");
         System.out.println("    - They will be repreented by the fits letter of their name. E.g. Red --> 'R' ");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("    - There will be NO doubles and NO blank colours in the code.");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "2)" + textReset + " The job of the code-breaker is to find the correct code. ");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "3)" + textReset + " Pegs on the side of the board are placed to provide clues to the code-breaker. ");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "4)" + textReset + " A white coloured peg represents that the colour is in the code, but not in the right position.");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "5)" + textReset + " A red coloured peg, represents that the colour is in the code and in the right position. ");
         System.out.println("    - It should be noted that there is no correlation of the location of the pegs to the location of the colours.");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "6)" + textReset + " Please enter the colour of the corresponding colour from left to right.");
         System.out.println("    - E.g.: If you think the code is Red, Green, Orange, White --> Enter: R G O W");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "7)" + textReset + " The letters will be inputted one by one.");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "8)" + textReset + " You will have 10 tries to guess the code! ");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "9)" + textReset + " Points will be awarded accordingly: 1 try --> CodeMaker: 1 point CodeBreaker: 10 points");
         System.out.println("    - 10 tries --> CodeMaker: 10 points CodeBreaker: 1 point");
-        System.out.println("<Enter Anything To Continue>");
+        System.out.println("<Press Enter To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "10)" + textReset + textPurple + " THATS IT! GOOD LUCK! " + textReset);
             
