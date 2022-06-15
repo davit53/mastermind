@@ -2,15 +2,17 @@
 Author: Davit Najaryan 
 Date: June 2, 2022
 Description: This is the game mastermind. 
-*            The user will have 10 tries to guess a colour based code made by the code-maker. 
+*            The user will have a chosen number of tries to guess a colour based code made by the code-maker. 
 *            If the code is guessed, the player wins.
 */
 //Imports 
 import java.util.*;
 public class ICS3U_FP {
-    //Save points from previous games
+
+    //Variables to save points from previous games
     private static int totalBreakerPoints = 0;
     private static int totalMakerPoints = 0;
+
     public static void main(String[] args){
         //Decleration of Variables
         Scanner input = new Scanner(System.in);
@@ -61,9 +63,11 @@ public class ICS3U_FP {
                 }
             }
         } while(playAgain.equals("1"));
+
         //Dsiplay amount of points
         System.out.println("\nThe Code-Maker has " + totalMakerPoints + " points!");
         System.out.println("The Code-Breaker has " + totalBreakerPoints + " points!");
+
         /*
         Grading System:
         F: 3 or less points
@@ -87,6 +91,7 @@ public class ICS3U_FP {
         else if(totalBreakerPoints > 12){
             System.out.println("\nYour grade is: A");
         }
+
         //Dsiplay who won
         if(totalMakerPoints < totalBreakerPoints){
             System.out.println(textCyan + "The Code-Breaker has more points! You have won!" + textReset);
@@ -98,6 +103,12 @@ public class ICS3U_FP {
             System.out.println(textGreen + "The Code-Maker has more points! They have won!" + textReset);
         }
     }
+
+    /*
+     * Description: This method includes the main functions of one full round
+     * Pre: The code is given to the method and the user is asked to guess the code
+     * Post: The method check and displayes if the user is correct or not
+    */
     public static void oneGame(){
         //Decleration of Main variables
         Scanner input = new Scanner(System.in);
@@ -151,8 +162,7 @@ public class ICS3U_FP {
             }
         }
 
-
-        //OptionsMessage
+        //Options Message
         System.out.println("\nThe colours that you can input include: ");
         System.out.println("R for Red");
         System.out.println("B for blue");
@@ -195,6 +205,7 @@ public class ICS3U_FP {
                 /*
                 Check if correct
                 */
+
                 //Case if all mathes
                 for(j = 0; j < 4; j++){
                     if(codeBreaker[j].equals(code[j])){
@@ -222,8 +233,10 @@ public class ICS3U_FP {
             }
             numberOfTries++;
         } while(verifyAnswer == false && numberOfTries != selectedNumberOfTriesCounter);
+
         //Point System (1 try --> CodeMaker: 1 point CodeBreaker: 14 points)
         //              14 tries --> CodeMaker: 14 points CodeBreaker: 1 point)
+        //10 Tries
         if(selectedNumberOfTriesCounter == 10){
             if(numberOfTries == 1){
                 codeMakerPoints++;
@@ -266,6 +279,7 @@ public class ICS3U_FP {
                 codeBreakerPoints++;
             }
         }
+        //12 Tries
         else if(selectedNumberOfTriesCounter == 12){
             if(numberOfTries == 1){
                 codeMakerPoints++;
@@ -316,6 +330,7 @@ public class ICS3U_FP {
                 codeBreakerPoints++;
             }
         }
+        //14 Tries
         else if(selectedNumberOfTriesCounter == 14){
             if(numberOfTries == 1){
                 codeMakerPoints++;
@@ -378,6 +393,7 @@ public class ICS3U_FP {
         //Add up the points
         totalBreakerPoints = totalBreakerPoints+codeBreakerPoints;   
         totalMakerPoints = totalMakerPoints+codeMakerPoints; 
+
         //Messages at the end
         if(numberOfTries == 10){
             System.out.println("\nYou have reached the limit of 10 tries! Game over!");
@@ -385,6 +401,7 @@ public class ICS3U_FP {
         if(verifyAnswer == true){
             System.out.println("\nGreat Job! That is the correct code!");
         }
+
         //Display Currect Point Tally
         System.out.println("\nCurrect Point Tally: ");
         System.out.println("Code-Maker: " + totalMakerPoints);
@@ -418,8 +435,14 @@ public class ICS3U_FP {
             code[i] = "Y";
         } 
     }
+
+    /*
+     * Dsecription: Puts the single generated colours into one string to make the full code
+     * The colours are genrated untill they are all unique
+     * The code is returned in an array type
+     */
     public static String[] fullColourCode(){
-        
+
         String[] code = new String[4];
         Random random = new Random();
         /*
@@ -446,6 +469,12 @@ public class ICS3U_FP {
         } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
         return code;
     }
+
+    /*
+     * Description: This is the first part of the introduction
+     * Pre: None
+     * Post: First part of introduction is printed
+     */
     public static void introductionsPartOne(){
         //Decleration Of Variables
         Scanner input = new Scanner(System.in);
@@ -469,6 +498,12 @@ public class ICS3U_FP {
         System.out.println("Hello There and Welcome to Mastermind! ");
 
     }
+
+    /*
+     * Description: This is the second part of the introduction
+     * Pre: None
+     * Post: Second part of introduction is printed
+    */
     public static void introductionsPartTwo(){
         
         //Decleration Of Variables
@@ -511,6 +546,11 @@ public class ICS3U_FP {
         System.out.print(textReset);
     }
     
+    /*
+     * Description: This is the instructions for the user
+     * Pre: None
+     * Post: Instructions are printed in the beggining of the code
+    */
     public static void instructions(){
         Scanner input = new Scanner(System.in);
         //Decleration Of Variables
@@ -557,9 +597,9 @@ public class ICS3U_FP {
         System.out.println(textCyan + "10)" + textReset + textPurple + " THATS IT! GOOD LUCK! " + textReset);
             
     }
+
     //Colour Options for text
     public static final String textReset = "\u001B[0m";
-    public static final String textBlack = "\u001B[30m";
     public static final String textRed = "\u001B[31m";
     public static final String textGreen = "\u001B[32m";
     public static final String textYellow = "\u001B[33m";
@@ -567,4 +607,5 @@ public class ICS3U_FP {
     public static final String textPurple = "\u001B[35m";
     public static final String textCyan = "\u001B[36m";
     public static final String textWhite = "\u001B[37m";
+
 }
