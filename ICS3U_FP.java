@@ -5,41 +5,33 @@ Description: This is the game mastermind.
 *            The user will have 10 tries to guess a colour based code made by the code-maker. 
 *            If the code is guessed, the player wins.
 */
-
 //Imports 
 import java.util.*;
-
 public class ICS3U_FP {
-
     //Save points from previous games
     private static int totalBreakerPoints = 0;
     private static int totalMakerPoints = 0;
-
     public static void main(String[] args){
-
         //Decleration of Variables
         Scanner input = new Scanner(System.in);
         String playAgain = "";
 
         //Introductions
         introductionsPartOne();
-
         String name = "";
         String next = "";
         System.out.println("What is your name?");
         name = input.nextLine();
         System.out.println("Hello there, " + name + ". Are you ready for the ultimate challange?!");
-
         introductionsPartTwo();
-
         //Instructions
         instructions();
 
         //First Run
         oneGame();
-
         //If user wants to play again
         do{
+            
             System.out.println("\nWould you like to play again?");
             System.out.println("Enter the following numbers: ");
             System.out.println("<1> Yes");
@@ -69,35 +61,32 @@ public class ICS3U_FP {
                 }
             }
         } while(playAgain.equals("1"));
-
         //Dsiplay amount of points
         System.out.println("\nThe Code-Maker has " + totalMakerPoints + " points!");
         System.out.println("The Code-Breaker has " + totalBreakerPoints + " points!");
-
         /*
         Grading System:
-        F: 2 or less points
-        D: 4 - 2 (not indluding)
-        C: 6 -4 (not including)
-        B: 10 - 6 (not including)
-        A: 15 - 10 points (not including)
+        F: 3 or less points
+        D: 4 - 6 (not indluding)
+        C: 6 - 9 (not including)
+        B: 9 - 12 (not including)
+        A: 12+ points
         */
-        if(totalBreakerPoints <= 2){
-            System.out.println("\nYour grade is:" + textYellow + " F" + textReset);
+        if(totalBreakerPoints <= 3){
+            System.out.println("\nYour grade is: F");
         }
-        else if(totalBreakerPoints > 2 && totalBreakerPoints <= 4){
-            System.out.println("\nYour grade is:" + textYellow + " D" + textReset);
+        else if(totalBreakerPoints > 3 && totalBreakerPoints <= 5){
+            System.out.println("\nYour grade is: D");
         }
-        else if(totalBreakerPoints > 4 && totalBreakerPoints <= 6){
-            System.out.println("\nYour grade is:" + textYellow + " C" + textReset);
+        else if(totalBreakerPoints > 5 && totalBreakerPoints <= 8){
+            System.out.println("\nYour grade is: C");
         }
-        else if(totalBreakerPoints > 6 && totalBreakerPoints <= 10){
-            System.out.println("\nYour grade is:" + textYellow + " B" + textReset);
+        else if(totalBreakerPoints > 8 && totalBreakerPoints <= 11){
+            System.out.println("\nYour grade is: B");
         }
-        else if(totalBreakerPoints > 10){
-            System.out.println("\nYour grade is:" + textYellow + " A" + textReset);
+        else if(totalBreakerPoints > 12){
+            System.out.println("\nYour grade is: A");
         }
-
         //Dsiplay who won
         if(totalMakerPoints < totalBreakerPoints){
             System.out.println(textCyan + "The Code-Breaker has more points! You have won!" + textReset);
@@ -108,11 +97,8 @@ public class ICS3U_FP {
         else if(totalBreakerPoints < totalMakerPoints){
             System.out.println(textGreen + "The Code-Maker has more points! They have won!" + textReset);
         }
-
     }
-
     public static void oneGame(){
-
         //Decleration of Main variables
         Scanner input = new Scanner(System.in);
         String[] code;
@@ -120,28 +106,53 @@ public class ICS3U_FP {
         int i = 0, j = 0, numberOfTries = 0;
         Boolean verifyAnswer = false;
         int codeBreakerPoints = 0, codeMakerPoints = 0;
-        String selectLevel;
-        
-            
-        /*
-        Select Level
-        */
-        code = fullColourCodeLevelOne();
-        System.out.println("Please select a level (Enter the corresponsing number)");
-        System.out.println("<1> Level 1");
-        System.out.println("<2> Level 2");
-        System.out.println("<3> Level 3");
-        selectLevel = input.nextLine();
+        int selectedNumberOfTriesCounter = 0;
+        String selectedNumberOfTries = "";
 
-        if(selectLevel.equals("1")){
-            code = fullColourCodeLevelOne();
+        System.out.println("How many tries would you like to have? (Please enter the following numbers: )");
+        System.out.println("<1> 10 tries (Hard)");
+        System.out.println("<2> 12 tries (Medium)");
+        System.out.println("<3> 14 tries (Easy)");
+        selectedNumberOfTries = input.nextLine();
+
+        if(selectedNumberOfTries.equals("1")){
+            selectedNumberOfTriesCounter = 10;
+            System.out.println("You have selected 10 tries! Points will be awarded accordingly.");
         }
-        else if(selectLevel.equals("2")){
-            code = fullColourCodeLevelOne();
+        else if(selectedNumberOfTries.equals("2")){
+            selectedNumberOfTriesCounter = 12;
+            System.out.println("You have selected 12 tries! Points will be awarded accordingly.");
+        }
+        else if(selectedNumberOfTries.equals("3")){
+            selectedNumberOfTriesCounter = 14;
+            System.out.println("You have selected 14 tries! Points will be awarded accordingly.");
+        }
+        else{
+            while(selectedNumberOfTries.equals("1") == false 
+            && selectedNumberOfTries.equals("2") == false 
+            && selectedNumberOfTries.equals("3") == false){
+                System.out.println("Please enter a proper number: ");
+                System.out.println("<1> 10 tries (Hard)");
+                System.out.println("<2> 12 tries (Medium)");
+                System.out.println("<3> 14 tries (Easy)");
+                selectedNumberOfTries = input.nextLine();
+                if(selectedNumberOfTries.equals("1")){
+                    selectedNumberOfTriesCounter = 10;
+                    System.out.println("You have selected 10 tries! Points will be awarded accordingly.");
+                }
+                else if(selectedNumberOfTries.equals("2")){
+                    selectedNumberOfTriesCounter = 12;
+                    System.out.println("You have selected 12 tries! Points will be awarded accordingly.");
+                }
+                else if(selectedNumberOfTries.equals("3")){
+                    selectedNumberOfTriesCounter = 14;
+                    System.out.println("You have selected 14 tries! Points will be awarded accordingly.");
+                }
+            }
         }
 
 
-        //Mini-Instructions
+        //OptionsMessage
         System.out.println("\nThe colours that you can input include: ");
         System.out.println("R for Red");
         System.out.println("B for blue");
@@ -149,7 +160,11 @@ public class ICS3U_FP {
         System.out.println("W for white");
         System.out.println("Y for yellow");
         System.out.println("G for green");
-
+    
+        /*
+        Random Generated Code
+        */
+        code = fullColourCode();
         do{
             //Print if correct code
             if(verifyAnswer == true){
@@ -190,7 +205,6 @@ public class ICS3U_FP {
                         break;
                     }
                 }
-
                 //Case Pugs
                 System.out.println("\n\n");
                 for(int x = 0; x < 4; x++){
@@ -206,56 +220,164 @@ public class ICS3U_FP {
                     }
                 }
             }
-
             numberOfTries++;
-        } while(verifyAnswer == false && numberOfTries != 10);
+        } while(verifyAnswer == false && numberOfTries != selectedNumberOfTriesCounter);
+        //Point System (1 try --> CodeMaker: 1 point CodeBreaker: 14 points)
+        //              14 tries --> CodeMaker: 14 points CodeBreaker: 1 point)
+        if(selectedNumberOfTriesCounter == 10){
+            if(numberOfTries == 1){
+                codeMakerPoints++;
+                codeBreakerPoints+=10;
+            }
+            else if(numberOfTries == 2){
+                codeMakerPoints+=2;
+                codeBreakerPoints+=9;
+            }
+            else if(numberOfTries == 3){
+                codeMakerPoints+=3;
+                codeBreakerPoints+=8;
+            }
+            else if(numberOfTries == 4){
+                codeMakerPoints+=4;
+                codeBreakerPoints+=7;
+            }
+            else if(numberOfTries == 5){
+                codeMakerPoints+=5;
+                codeBreakerPoints+=6;
+            }
+            else if(numberOfTries == 6){
+                codeMakerPoints+=6;
+                codeBreakerPoints+=5;
+            }
+            else if(numberOfTries == 7){
+                codeMakerPoints+=7;
+                codeBreakerPoints+=4;
+            }
+            else if(numberOfTries == 8){
+                codeMakerPoints+=8;
+                codeBreakerPoints+=3;
+            }
+            else if(numberOfTries == 9){
+                codeMakerPoints+=9;
+                codeBreakerPoints+=2;
+            }
+            else{
+                codeMakerPoints+=10;
+                codeBreakerPoints++;
+            }
+        }
+        else if(selectedNumberOfTriesCounter == 12){
+            if(numberOfTries == 1){
+                codeMakerPoints++;
+                codeBreakerPoints+=12;
+            }
+            else if(numberOfTries == 2){
+                codeMakerPoints+=2;
+                codeBreakerPoints+=11;
+            }
+            else if(numberOfTries == 3){
+                codeMakerPoints+=3;
+                codeBreakerPoints+=10;
+            }
+            else if(numberOfTries == 4){
+                codeMakerPoints+=4;
+                codeBreakerPoints+=9;
+            }
+            else if(numberOfTries == 5){
+                codeMakerPoints+=5;
+                codeBreakerPoints+=8;
+            }
+            else if(numberOfTries == 6){
+                codeMakerPoints+=6;
+                codeBreakerPoints+=7;
+            }
+            else if(numberOfTries == 7){
+                codeMakerPoints+=7;
+                codeBreakerPoints+=6;
+            }
+            else if(numberOfTries == 8){
+                codeMakerPoints+=8;
+                codeBreakerPoints+=5;
+            }
+            else if(numberOfTries == 9){
+                codeMakerPoints+=9;
+                codeBreakerPoints+=4;
+            }
+            else if(numberOfTries == 10){
+                codeMakerPoints+=10;
+                codeBreakerPoints+=3;
+            }
+            else if(numberOfTries == 11){
+                codeMakerPoints+=11;
+                codeBreakerPoints+=2;
+            }
+            else if(numberOfTries == 12){
+                codeMakerPoints+=12;
+                codeBreakerPoints++;
+            }
+        }
+        else if(selectedNumberOfTriesCounter == 14){
+            if(numberOfTries == 1){
+                codeMakerPoints++;
+                codeBreakerPoints+=14;
+            }
+            else if(numberOfTries == 2){
+                codeMakerPoints+=2;
+                codeBreakerPoints+=13;
+            }
+            else if(numberOfTries == 3){
+                codeMakerPoints+=3;
+                codeBreakerPoints+=12;
+            }
+            else if(numberOfTries == 4){
+                codeMakerPoints+=4;
+                codeBreakerPoints+=11;
+            }
+            else if(numberOfTries == 5){
+                codeMakerPoints+=5;
+                codeBreakerPoints+=10;
+            }
+            else if(numberOfTries == 6){
+                codeMakerPoints+=6;
+                codeBreakerPoints+=9;
+            }
+            else if(numberOfTries == 7){
+                codeMakerPoints+=7;
+                codeBreakerPoints+=8;
+            }
+            else if(numberOfTries == 8){
+                codeMakerPoints+=8;
+                codeBreakerPoints+=7;
+            }
+            else if(numberOfTries == 9){
+                codeMakerPoints+=9;
+                codeBreakerPoints+=6;
+            }
+            else if(numberOfTries == 10){
+                codeMakerPoints+=10;
+                codeBreakerPoints+=5;
+            }
+            else if(numberOfTries == 11){
+                codeMakerPoints+=11;
+                codeBreakerPoints+=4;
+            }
+            else if(numberOfTries == 12){
+                codeMakerPoints+=12;
+                codeBreakerPoints+=3;
+            }
+            else if(numberOfTries == 13){
+                codeMakerPoints+=13;
+                codeBreakerPoints+=2;
+            }
+            else if(numberOfTries == 14){
+                codeMakerPoints+=14;
+                codeBreakerPoints++;
+            }
+        }
 
-        //Point System (1 try --> CodeMaker: 1 point CodeBreaker: 10 points)
-        //              10 tries --> CodeMaker: 10 points CodeBreaker: 1 point)
-        if(numberOfTries == 1){
-            codeMakerPoints++;
-            codeBreakerPoints+=10;
-        }
-        else if(numberOfTries == 2){
-            codeMakerPoints+=2;
-            codeBreakerPoints+=9;
-        }
-        else if(numberOfTries == 3){
-            codeMakerPoints+=3;
-            codeBreakerPoints+=8;
-        }
-        else if(numberOfTries == 4){
-            codeMakerPoints+=4;
-            codeBreakerPoints+=7;
-        }
-        else if(numberOfTries == 5){
-            codeMakerPoints+=5;
-            codeBreakerPoints+=6;
-        }
-        else if(numberOfTries == 6){
-            codeMakerPoints+=6;
-            codeBreakerPoints+=5;
-        }
-        else if(numberOfTries == 7){
-            codeMakerPoints+=7;
-            codeBreakerPoints+=4;
-        }
-        else if(numberOfTries == 8){
-            codeMakerPoints+=8;
-            codeBreakerPoints+=3;
-        }
-        else if(numberOfTries == 9){
-            codeMakerPoints+=9;
-            codeBreakerPoints+=2;
-        }
-        else{
-            codeMakerPoints+=10;
-            codeBreakerPoints++;
-        }
         //Add up the points
         totalBreakerPoints = totalBreakerPoints+codeBreakerPoints;   
         totalMakerPoints = totalMakerPoints+codeMakerPoints; 
-
         //Messages at the end
         if(numberOfTries == 10){
             System.out.println("\nYou have reached the limit of 10 tries! Game over!");
@@ -263,14 +385,12 @@ public class ICS3U_FP {
         if(verifyAnswer == true){
             System.out.println("\nGreat Job! That is the correct code!");
         }
-
         //Display Currect Point Tally
         System.out.println("\nCurrect Point Tally: ");
         System.out.println("Code-Maker: " + totalMakerPoints);
         System.out.println("Code-Breaker: " + totalBreakerPoints);
          
     }
-
     
     /*
      * Description: Generate one colour of a the code 
@@ -278,7 +398,6 @@ public class ICS3U_FP {
      * Post: Colour is converted into a letter with the type String
      */
     public static void generateOneColour(String[] code, int i, Random random){
-
         int randomCodeNumber = random.nextInt(6);
         if(randomCodeNumber  == 0){
             code[i] = "R";
@@ -298,19 +417,11 @@ public class ICS3U_FP {
         else if(randomCodeNumber  == 5){
             code[i] = "Y";
         } 
-
     }
-
-    /* 
-     * Description: 4 Colour code combination
-     * Pre: Colours are given to the functions as strings
-     * Post: Code is returned as a array string
-     */ 
-    public static String[] fullColourCodeLevelOne(){
+    public static String[] fullColourCode(){
         
         String[] code = new String[4];
         Random random = new Random();
-
         /*
         Random Generated Code
         */
@@ -318,134 +429,28 @@ public class ICS3U_FP {
         int  i = 0;
         int randomCodeNumber = random.nextInt(6);
         generateOneColour(code, i, random);
-
         //Second Colour
         i = 1;
         do{
             generateOneColour(code, i, random);
         } while(code[0].equals(code[i]));
-
         //Third Colour
         i = 2;
         do{
             generateOneColour(code, i, random);
         } while(code[0].equals(code[i]) || code[1].equals(code[i]));
-
         //Fourth Colour
         i = 3;
         do{
             generateOneColour(code, i,random);
         } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
-
         return code;
-
     }
-
-    /* 
-     * Description: 5 Colour code combination
-     * Pre: Colours are given to the functions as strings
-     * Post: Code is returned as a array string
-     */ 
-    public static String[] fullColourCodeLevelTwo(){
-        
-        String[] code = new String[4];
-        Random random = new Random();
-
-        /*
-        Random Generated Code
-        */
-        //First Colour
-        int  i = 0;
-        int randomCodeNumber = random.nextInt(6);
-        generateOneColour(code, i, random);
-
-        //Second Colour
-        i = 1;
-        do{
-            generateOneColour(code, i, random);
-        } while(code[0].equals(code[i]));
-
-        //Third Colour
-        i = 2;
-        do{
-            generateOneColour(code, i, random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]));
-
-        //Fourth Colour
-        i = 3;
-        do{
-            generateOneColour(code, i,random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
-
-        //Fifth Colour
-        i = 4;
-        do{
-            generateOneColour(code, i,random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]) ||code[3].equals(code[i]));
-
-        return code;
-
-    }
-
-    /* 
-     * Description: 6 Colour code combination
-     * Pre: Colours are given to the functions as strings
-     * Post: Code is returned as a array string
-     */ 
-    public static String[] fullColourCodeLevelThree(){
-        
-        String[] code = new String[4];
-        Random random = new Random();
-
-        /*
-        Random Generated Code
-        */
-        //First Colour
-        int  i = 0;
-        int randomCodeNumber = random.nextInt(6);
-        generateOneColour(code, i, random);
-
-        //Second Colour
-        i = 1;
-        do{
-            generateOneColour(code, i, random);
-        } while(code[0].equals(code[i]));
-
-        //Third Colour
-        i = 2;
-        do{
-            generateOneColour(code, i, random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]));
-
-        //Fourth Colour
-        i = 3;
-        do{
-            generateOneColour(code, i,random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]));
-
-        //Fifth Colour
-        i = 4;
-        do{
-            generateOneColour(code, i,random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]) ||code[3].equals(code[i]));
-
-        //Sixth Colour
-        i = 5;
-        do{
-            generateOneColour(code, i,random);
-        } while(code[0].equals(code[i]) || code[1].equals(code[i]) || code[2].equals(code[i]) || code[3].equals(code[i]) ||code[4].equals(code[i]));
-
-        return code;
-
-    }
-
     public static void introductionsPartOne(){
-
         //Decleration Of Variables
         Scanner input = new Scanner(System.in);
         String name = "";
         String next = "";
-
         //Introduction
         System.out.print("\033[0;1m");
         System.out.println("_____________________________________________________");
@@ -465,22 +470,20 @@ public class ICS3U_FP {
 
     }
     public static void introductionsPartTwo(){
-
         
         //Decleration Of Variables
         Scanner input = new Scanner(System.in);
         String name = "";
         String next = "";
-
         //Made so that the user is not overwhelmed with information and text
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println("------EXPLENATION------");
         System.out.println("NOTE: This is a general overview of the game.");
         System.out.println("**** 1 ****");
         System.out.println("Mastermind is a player vs player board game. It consists of the code-maker and the code-breaker. ");
         System.out.println("The code-maker takes a specified amount of colours and makes a 4 colour code. ");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println("**** 2 ****");
         System.out.println("Example: the available colours are");
@@ -492,69 +495,68 @@ public class ICS3U_FP {
         System.out.print(textYellow + "Yellow " + textReset);
         System.out.print("\033[0;1m");
         System.out.println("The job of the code-breaker is to find the correct code. ");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println("**** 3 ****");
         System.out.println("Pegs on the side of the board are placed to provide clues to the code-breaker.");
         System.out.println("A white coloured peg represents that the colour is in the code, but not in the right position.");
         System.out.println("A red coloured peg, represents that the colour is in the code and in the right position. ");
         System.out.println("It should be noted that there is no correlation of the location of the pegs to the location of the colours.");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println("**** 4 ****");
         System.out.println("You must use logic and reasoning to figure out which positions are correct and which are not!");
         System.out.println("If no peg is placed, that means a colour within the current code does not exist in the correct code.");
         System.out.println("You will have 10 tries to guess the code!");
         System.out.print(textReset);
-
     }
     
     public static void instructions(){
-
         Scanner input = new Scanner(System.in);
-
         //Decleration Of Variables
         String next = "";
-
-        System.out.println("\n<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
         System.out.println("Before we get started, here are the official instructions for this game: ");
         System.out.println(textCyan + "1)" + textReset + " The code-maker takes 4 colours and makes a code. ");
         System.out.println("    - The available colours are red, green, blue, orange, white, and yellow.");
         System.out.println("    - They will be repreented by the fits letter of their name. E.g. Red --> 'R' ");
-        System.out.println("    - There will be NO doubles and NO blank colours in the code.");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "2)" + textReset + " The job of the code-breaker is to find the correct code. ");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "3)" + textReset + " Pegs on the side of the board are placed to provide clues to the code-breaker. ");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "4)" + textReset + " A white coloured peg represents that the colour is in the code, but not in the right position.");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "5)" + textReset + " A red coloured peg, represents that the colour is in the code and in the right position. ");
         System.out.println("    - It should be noted that there is no correlation of the location of the pegs to the location of the colours.");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "6)" + textReset + " Please enter the colour of the corresponding colour from left to right.");
         System.out.println("    - E.g.: If you think the code is Red, Green, Orange, White --> Enter: R G O W");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "7)" + textReset + " The letters will be inputted one by one.");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "8)" + textReset + " You will have 10 tries to guess the code! ");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "9)" + textReset + " Points will be awarded accordingly: 1 try --> CodeMaker: 1 point CodeBreaker: 10 points");
         System.out.println("    - 10 tries --> CodeMaker: 10 points CodeBreaker: 1 point");
-        System.out.println("<Press Enter To Continue>");
+        System.out.println("<Enter Anything To Continue>");
+        next = input.nextLine();
+        System.out.println(textCyan + "10)" + textReset + " You will have the opportunity to choose your number of tries you would like to have from the following options: ");
+        System.out.println(textYellow + "    10 tries" + textReset);
+        System.out.println(textYellow + "    12 tries" + textReset);
+        System.out.println(textYellow + "    14 tries" + textReset);
+        System.out.println("<Enter Anything To Continue>");
         next = input.nextLine();
         System.out.println(textCyan + "10)" + textReset + textPurple + " THATS IT! GOOD LUCK! " + textReset);
             
     }
-
     //Colour Options for text
     public static final String textReset = "\u001B[0m";
     public static final String textBlack = "\u001B[30m";
@@ -565,6 +567,4 @@ public class ICS3U_FP {
     public static final String textPurple = "\u001B[35m";
     public static final String textCyan = "\u001B[36m";
     public static final String textWhite = "\u001B[37m";
-
-
 }
